@@ -8,54 +8,23 @@
  * @format
  */
 
-import React, {type PropsWithChildren} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
+  Animated,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
-  View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section: React.FC<
-  PropsWithChildren<{
-    title: string;
-  }>
-> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import View = Animated.View;
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import GoogleSignInBtn from './components/google-signIn/GoogleSignInBtn';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -63,6 +32,40 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  GoogleSignin.configure({
+    webClientId:
+      '1023915973562-gk908j36kp5atn21t9s8r5ut986oktu5.apps.googleusercontent.com',
+  });
+
+  const onAuthStateChanged = user => {
+    setUser(user);
+    if (initializing) {
+      setInitializing(false);
+    }
+  };
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+
+  if (initializing) return null;
+
+  if (!user) {
+    return (
+      <View>
+        <GoogleSignInBtn />
+      </View>
+    );
+  }
+
+  const todo = firestore().collection('Todos').doc('Todo-1').get();
+
+  console.log(todo);
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -73,26 +76,7 @@ const App = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
+        <Text style={styles.sectionTitle}>Home</Text>
       </ScrollView>
     </SafeAreaView>
   );
