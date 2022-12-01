@@ -80,7 +80,7 @@ const App = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Text style={styles.sectionTitle}>환영합니다 {displayName}님</Text>
+        <Text style={styles.sectionTitle}>{displayName}님</Text>
         <TodoList />
       </ScrollView>
     </SafeAreaView>
