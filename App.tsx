@@ -20,9 +20,10 @@ import {
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import auth from '@react-native-firebase/auth';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import GoogleSignInBtn from './components/google-signIn/GoogleSignInBtn';
+import TodoList from './components/TodoList';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -64,6 +65,8 @@ const App = () => {
     );
   }
 
+  const {displayName} = user as FirebaseAuthTypes.User;
+
   // const todo = firestore().collection('Todos').doc('Todo-1').get();
   //
   // console.log(todo);
@@ -77,7 +80,8 @@ const App = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Text style={styles.sectionTitle}>Home</Text>
+        <Text style={styles.sectionTitle}>환영합니다 {displayName}님</Text>
+        <TodoList />
       </ScrollView>
     </SafeAreaView>
   );
