@@ -8,22 +8,21 @@
  * @format
  */
 
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {createContext, useCallback, useEffect, useState} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
   View,
 } from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import GoogleSignInBtn from './components/google-signIn/GoogleSignInBtn';
 import TodoList from './components/TodoList';
+
+export const AuthContext = createContext<FirebaseAuthTypes.User | null>(null);
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -63,16 +62,14 @@ const App = () => {
 
   const {displayName} = user as FirebaseAuthTypes.User;
 
-  // const todo = firestore().collection('Todos').doc('Todo-1').get();
-  //
-  // console.log(todo);
-
   return (
-    <SafeAreaView className={'p-10 w-screen'}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text style={styles.sectionTitle}>{displayName}님</Text>
-      <TodoList />
-    </SafeAreaView>
+    <AuthContext.Provider value={user}>
+      <SafeAreaView className={'p-10 w-screen'}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <Text style={styles.sectionTitle}>{displayName}님</Text>
+        <TodoList />
+      </SafeAreaView>
+    </AuthContext.Provider>
   );
 };
 

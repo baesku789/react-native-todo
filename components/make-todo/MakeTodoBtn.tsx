@@ -17,10 +17,6 @@ const MakeTodoBtn = () => {
     setShow(true);
   };
 
-  const submitTodo = (text: string) => {
-    setShow(false);
-  };
-
   return (
     <ModalContext.Provider value={{show, setShow}}>
       <Button className={'w-120'} onPress={showModal}>
@@ -30,7 +26,6 @@ const MakeTodoBtn = () => {
         animationType={'slide'}
         visible={show}
         onRequestClose={() => setShow(false)}
-        handlePress={submitTodo}
       />
     </ModalContext.Provider>
   );
