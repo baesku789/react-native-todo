@@ -1,7 +1,7 @@
 import {Pressable, Text} from 'react-native';
 import React, {createContext, useState} from 'react';
 import MakeTodoModal from './MakeTodoModal';
-import {twButton} from '../../tailwindStyle';
+import Button from '../button/Button';
 
 export interface IModalContext {
   show: boolean;
@@ -23,9 +23,9 @@ const MakeTodoBtn = () => {
 
   return (
     <ModalContext.Provider value={{show, setShow}}>
-      <Pressable className={`w-120 ${twButton}`} onPress={showModal}>
+      <Button className={'w-120'} onPress={showModal}>
         <Text className={'text-center'}>할일 추가</Text>
-      </Pressable>
+      </Button>
       <MakeTodoModal
         animationType={'slide'}
         visible={show}

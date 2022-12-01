@@ -8,8 +8,8 @@ import {
   View,
 } from 'react-native';
 import React, {useContext} from 'react';
-import {twButton, twInputPadding} from '../../tailwindStyle';
 import {IModalContext, ModalContext} from './MakeTodoBtn';
+import Button from '../button/Button';
 
 const cancelIcon = require('../../assets/images/cancel_icon.png');
 
@@ -30,16 +30,16 @@ const MakeTodoModal = (props: MakeTodoModalProp) => {
     <Modal {...props}>
       <View className={'p-20'}>
         <TextInput
-          className={`border-1 border-black ${twInputPadding}`}
+          className={'border-1 border-black pl-10'}
           value={text}
           onChangeText={onChangeText}
           placeholder={'할 일을 입력하세요.'}
         />
-        <Pressable
-          className={`rounded-full w-60 ${twButton} mt-20`}
+        <Button
+          className={'rounded-full w-60 mt-20'}
           onPress={() => props.handlePress(text)}>
           <Text>제출</Text>
-        </Pressable>
+        </Button>
         <Pressable className={'mx-auto mt-20'} onPress={closeModal}>
           <Image source={cancelIcon} />
         </Pressable>
