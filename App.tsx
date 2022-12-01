@@ -28,10 +28,6 @@ import TodoList from './components/TodoList';
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
@@ -72,17 +68,10 @@ const App = () => {
   // console.log(todo);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Text style={styles.sectionTitle}>{displayName}님</Text>
-        <TodoList />
-      </ScrollView>
+    <SafeAreaView className={'p-10 w-screen'}>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <Text style={styles.sectionTitle}>{displayName}님</Text>
+      <TodoList />
     </SafeAreaView>
   );
 };

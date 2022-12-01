@@ -7,6 +7,9 @@ const px0_2000 = {...Array.from(Array(2001)).map((_, i) => `${i}px`)};
 module.exports = {
   content: ['./App.tsx', './components/**/*.{jsx,tsx}'],
   theme: {
+    colors: {
+      red1: '#ed7272',
+    },
     extend: {
       padding: px0_1000,
       borderRadius: px0_100,
