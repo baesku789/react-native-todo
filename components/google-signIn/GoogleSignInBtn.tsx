@@ -1,12 +1,16 @@
-import {Button} from 'react-native';
+import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 import {onGoogleButtonPress} from './index';
 
 const GoogleSignInBtn = () => {
   return (
-    <Button
-      title={'Google Sign-In'}
+    <GoogleSigninButton
+      style={{width: 192, height: 48}}
+      size={GoogleSigninButton.Size.Wide}
+      color={GoogleSigninButton.Color.Dark}
       onPress={() =>
-        onGoogleButtonPress().then(() => console.log('Sign in with Google'))
+        onGoogleButtonPress()
+          .then(() => console.log('sign in with google'))
+          .catch(e => console.log(e))
       }
     />
   );

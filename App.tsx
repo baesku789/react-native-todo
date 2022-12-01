@@ -8,21 +8,19 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
-  Animated,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
+  View,
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import View = Animated.View;
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import GoogleSignInBtn from './components/google-signIn/GoogleSignInBtn';
 
@@ -41,17 +39,20 @@ const App = () => {
       '1023915973562-gk908j36kp5atn21t9s8r5ut986oktu5.apps.googleusercontent.com',
   });
 
-  const onAuthStateChanged = user => {
-    setUser(user);
-    if (initializing) {
-      setInitializing(false);
-    }
-  };
+  const onAuthStateChanged = useCallback(
+    user => {
+      setUser(user);
+      if (initializing) {
+        setInitializing(false);
+      }
+    },
+    [initializing],
+  );
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber;
-  }, []);
+  }, [onAuthStateChanged]);
 
   if (initializing) return null;
 
@@ -63,9 +64,9 @@ const App = () => {
     );
   }
 
-  const todo = firestore().collection('Todos').doc('Todo-1').get();
-
-  console.log(todo);
+  // const todo = firestore().collection('Todos').doc('Todo-1').get();
+  //
+  // console.log(todo);
 
   return (
     <SafeAreaView style={backgroundStyle}>
