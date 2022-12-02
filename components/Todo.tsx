@@ -1,7 +1,7 @@
 import {Pressable, Text, View} from 'react-native';
 import {ITodo} from '../index';
 import React from 'react';
-import CheckIcon from '../assets/images/task_alt_FILL0_wght400_GRAD0_opsz40.svg';
+import CheckIcon from 'assets/images/task_alt_FILL0_wght400_GRAD0_opsz40.svg';
 import firestore from '@react-native-firebase/firestore';
 
 const Todo = ({text, done, id}: ITodo) => {
