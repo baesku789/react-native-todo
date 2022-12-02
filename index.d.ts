@@ -1,6 +1,6 @@
-export interface Todo {
+export interface ITodo {
   text: string;
   done: boolean;
 }
 
-export type Todos = Todo[];
+export type ITodos = ITodo[];
