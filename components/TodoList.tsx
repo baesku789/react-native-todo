@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     display: 'flex',
+    gap: '10px',
   },
 });
 
