@@ -26,7 +26,7 @@ const MakeTodoModal = (props: MakeTodoModalProp) => {
   const {setShow} = useContext(ModalContext) as IModalContext;
 
   const user = useContext(AuthContext);
-  const {displayName} = user as FirebaseAuthTypes.User;
+  const {email} = user as FirebaseAuthTypes.User;
 
   const closeModal = () => {
     setShow(false);
@@ -35,7 +35,7 @@ const MakeTodoModal = (props: MakeTodoModalProp) => {
   const submitTodo = (text: string) => {
     firestore()
       .collection('Todos')
-      .doc(displayName as string)
+      .doc(email as string)
       .set({
         text,
         done: false,
