@@ -1,5 +1,4 @@
 import {
-  Image,
   Modal,
   ModalBaseProps,
   Pressable,
@@ -13,8 +12,7 @@ import Button from '../button/Button';
 import firestore from '@react-native-firebase/firestore';
 import {AuthContext} from '../../App';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
-
-const cancelIcon = require('../../assets/images/cancel_icon.png');
+import CancelIcon from '../../assets/images/cancel_icon.svg';
 
 interface MakeTodoModalProp extends Partial<ModalBaseProps> {
   handlePress?: (text: string) => void;
@@ -58,7 +56,7 @@ const MakeTodoModal = (props: MakeTodoModalProp) => {
           <Text>제출</Text>
         </Button>
         <Pressable className={'mx-auto mt-20'} onPress={closeModal}>
-          <Image source={cancelIcon} />
+          <CancelIcon fill={'#212121'} />
         </Pressable>
       </View>
     </Modal>
