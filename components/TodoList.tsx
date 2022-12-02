@@ -19,19 +19,31 @@ const TodoList = () => {
     const subscriber = firestore()
       .collection('Todos')
       .where('email', '==', email)
-      .onSnapshot(snapshot => {
-        snapshot.docChanges().forEach(change => {
-          if (change.type === 'added') {
-            todosRef.push({...change.doc.data(), id: change.doc.id});
-            setTodos(todosRef);
-          }
-          if (change.type === 'modified') {
-            const index = todosRef.findIndex(todo => todo.id === change.doc.id);
-            todosRef[index] = {...todosRef[index], ...change.doc.data()};
-            setTodos(todosRef);
-          }
-        });
-      });
+      .onSnapshot(
+        snapshot => {
+          snapshot.docChanges().forEach(change => {
+            if (change.type === 'added') {
+              todosRef.push({...change.doc.data(), id: change.doc.id});
+              setTodos(todosRef);
+            }
+            if (change.type === 'modified') {
+              const index = todosRef.findIndex(
+                todo => todo.id === change.doc.id,
+              );
+              todosRef[index] = {...todosRef[index], ...change.doc.data()};
+              setTodos(todosRef);
+            }
+            if (change.type === 'removed') {
+              setTodos(
+                todosRef.filter(
+                  todo => todo.id !== firestore.FieldPath.documentId(),
+                ),
+              );
+            }
+          });
+        },
+        error => console.log(error),
+      );
 
     return () => subscriber;
   }, [email]);

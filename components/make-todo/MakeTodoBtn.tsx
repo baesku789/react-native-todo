@@ -19,7 +19,7 @@ const MakeTodoBtn = () => {
 
   return (
     <ModalContext.Provider value={{show, setShow}}>
-      <Button className={'w-120'} onPress={showModal}>
+      <Button className={'w-120 mt-20'} onPress={showModal}>
         <Text className={'text-center'}>할일 추가</Text>
       </Button>
       <MakeTodoModal

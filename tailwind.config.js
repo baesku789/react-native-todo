@@ -9,6 +9,7 @@ module.exports = {
   theme: {
     colors: {
       red1: '#ed7272',
+      gray1: '#e3dede',
     },
     extend: {
       padding: px0_1000,
