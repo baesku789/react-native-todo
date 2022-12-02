@@ -16,6 +16,7 @@ const TodoList = () => {
   const [todos, setTodos] = useState<FirebaseFirestoreTypes.DocumentData[]>([]);
 
   useEffect(() => {
+    // firebase 연동 시 미리 데이터 받아오기
     const query = firestore().collection('Todos').where('email', '==', email);
 
     const subscriber = query.onSnapshot(
