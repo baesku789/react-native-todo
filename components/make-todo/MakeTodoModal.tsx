@@ -35,10 +35,10 @@ const MakeTodoModal = (props: MakeTodoModalProp) => {
   const submitTodo = (text: string) => {
     firestore()
       .collection('Todos')
-      .doc(email as string)
-      .set({
+      .add({
         text,
         done: false,
+        email,
       })
       .then(() => setShow(false));
   };
