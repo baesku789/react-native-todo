@@ -7,43 +7,41 @@ import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
+import produce from 'immer';
 
 const TodoList = () => {
   const user = useContext(AuthContext);
   const {email} = user as FirebaseAuthTypes.User;
 
   const [todos, setTodos] = useState<FirebaseFirestoreTypes.DocumentData[]>([]);
-  const todosRef: FirebaseFirestoreTypes.DocumentData[] = [];
 
   useEffect(() => {
-    const subscriber = firestore()
-      .collection('Todos')
-      .where('email', '==', email)
-      .onSnapshot(
-        snapshot => {
-          snapshot.docChanges().forEach(change => {
-            if (change.type === 'added') {
-              todosRef.push({...change.doc.data(), id: change.doc.id});
-              setTodos(todosRef);
-            }
-            if (change.type === 'modified') {
-              const index = todosRef.findIndex(
-                todo => todo.id === change.doc.id,
-              );
-              todosRef[index] = {...todosRef[index], ...change.doc.data()};
-              setTodos(todosRef);
-            }
-            if (change.type === 'removed') {
-              setTodos(
-                todosRef.filter(
-                  todo => todo.id !== firestore.FieldPath.documentId(),
-                ),
-              );
-            }
-          });
-        },
-        error => console.log(error),
-      );
+    const query = firestore().collection('Todos').where('email', '==', email);
+
+    const subscriber = query.onSnapshot(
+      snapshot => {
+        snapshot.docChanges().forEach(change => {
+          if (change.type === 'added') {
+            setTodos(todos => [
+              ...todos,
+              {...change.doc.data(), id: change.doc.id},
+            ]);
+          }
+          if (change.type === 'modified') {
+            setTodos(todos => {
+              const index = todos.findIndex(todo => todo.id === change.doc.id);
+              return produce(todos, draft => {
+                draft[index] = {...todos[index], ...change.doc.data()};
+              });
+            });
+          }
+          if (change.type === 'removed') {
+            setTodos(todos => todos.filter(todo => todo.id !== change.doc.id));
+          }
+        });
+      },
+      error => console.log(error),
+    );
 
     return () => subscriber;
   }, [email]);

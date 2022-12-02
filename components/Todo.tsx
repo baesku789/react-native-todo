@@ -1,18 +1,43 @@
 import {Pressable, Text, View} from 'react-native';
 import {ITodo} from '../index';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CheckIcon from 'assets/images/task_alt_FILL0_wght400_GRAD0_opsz40.svg';
 import DeleteIcon from 'assets/images/delete_FILL0_wght400_GRAD0_opsz40.svg';
-import firestore from '@react-native-firebase/firestore';
+import firestore, {
+  FirebaseFirestoreTypes,
+} from '@react-native-firebase/firestore';
 
 const Todo = ({text, done, id}: ITodo) => {
+  const [doc, setDoc] = useState<FirebaseFirestoreTypes.DocumentData | null>(
+    null,
+  );
+
+  const getDoc = async () => {
+    const res = await firestore().collection('Todos').doc(id);
+    return res;
+  };
+
   const handleDone = async () => {
-    await firestore().collection('Todos').doc(id).update({done: !done});
+    if (!doc) return;
+    await doc.update({done: !done});
   };
 
   const deleteTodo = async () => {
-    await firestore().collection('Todos').doc(id).delete();
+    if (!doc) return;
+    await doc.delete();
   };
+
+  useEffect(() => {
+    getDoc().then(res => setDoc(res));
+  }, []);
+
+  if (!doc) {
+    return (
+      <View>
+        <Text>no firebase</Text>
+      </View>
+    );
+  }
 
   return (
     <View
