@@ -22,17 +22,22 @@ const TodoList = () => {
       .onSnapshot(snapshot => {
         snapshot.docChanges().forEach(change => {
           if (change.type === 'added') {
-            todosRef.push(change.doc.data());
+            todosRef.push({...change.doc.data(), id: change.doc.id});
+            setTodos(todosRef);
+          }
+          if (change.type === 'modified') {
+            const index = todosRef.findIndex(todo => todo.id === change.doc.id);
+            todosRef[index] = {...todosRef[index], ...change.doc.data()};
+            setTodos(todosRef);
           }
         });
-        setTodos(todosRef);
       });
 
     return () => subscriber;
   }, [email]);
 
   return (
-    <View className={'w-full flex justify-center'}>
+    <View className={'w-full flex justify-center mt-20'}>
       <FlatList
         contentContainerStyle={styles.container}
         data={todos}
