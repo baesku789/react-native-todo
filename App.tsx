@@ -54,9 +54,9 @@ const App = () => {
 
   if (!user) {
     return (
-      <View>
+      <SafeAreaView>
         <GoogleSignInBtn />
-      </View>
+      </SafeAreaView>
     );
   }
 
