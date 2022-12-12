@@ -10,20 +10,13 @@ interface TodoListProps {
 }
 
 const TodoList = ({todos}: TodoListProps) => {
-  const renderItem = (item: ITodo) => {
-    return <Todo {...item} />;
-  };
-
   return (
-    <>
-      <FlatList
-        contentContainerStyle={styles.container}
-        data={todos}
-        keyExtractor={item => item.id}
-        renderItem={renderItem}
-      />
-      <MakeTodoBtn />
-    </>
+    <FlatList
+      contentContainerStyle={styles.container}
+      data={todos}
+      keyExtractor={item => item.id}
+      renderItem={(item: ITodo) => <Todo {...item} />}
+    />
   );
 };
 

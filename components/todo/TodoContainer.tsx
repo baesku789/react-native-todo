@@ -8,6 +8,7 @@ import firestore, {
 import {WritableDraft} from 'immer/dist/internal';
 import produce from 'immer';
 import TodoList from './TodoList';
+import MakeTodoBtn from '../make-todo/MakeTodoBtn';
 
 const TodoContainer = () => {
   const user = useContext(AuthContext);
@@ -66,9 +67,10 @@ const TodoContainer = () => {
   }, [email]);
 
   return (
-    <View className={'w-full flex justify-center mt-20'}>
+    <View className={'w-full flex justify-center mt-20 relative'}>
       <Text>{todos.length}개의 할 일이 있습니다.</Text>
       <TodoList todos={todos} />
+      <MakeTodoBtn />
     </View>
   );
 };
