@@ -10,6 +10,7 @@ module.exports = {
     colors: {
       red1: '#ed7272',
       gray1: '#e3dede',
+      overlay: 'rgba(0, 0, 0, 0.5)',
     },
     extend: {
       padding: px0_1000,

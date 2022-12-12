@@ -1,5 +1,5 @@
 import MakeTodoBtn from './make-todo/MakeTodoBtn';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Todo from './Todo';
 import React, {useContext, useEffect, useState} from 'react';
 import {AuthContext} from '../App';
@@ -49,6 +49,7 @@ const TodoList = () => {
 
   return (
     <View className={'w-full flex justify-center mt-20'}>
+      <Text>{todos.length}개의 할 일이 있습니다.</Text>
       <FlatList
         contentContainerStyle={styles.container}
         data={todos}
@@ -62,7 +63,7 @@ const TodoList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     display: 'flex',
     gap: '10px',
   },

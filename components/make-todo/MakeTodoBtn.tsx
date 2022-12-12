@@ -1,4 +1,4 @@
-import {Pressable, Text} from 'react-native';
+import {Text} from 'react-native';
 import React, {createContext, useState} from 'react';
 import MakeTodoModal from './MakeTodoModal';
 import Button from '../button/Button';
@@ -25,6 +25,7 @@ const MakeTodoBtn = () => {
       <MakeTodoModal
         animationType={'slide'}
         visible={show}
+        transparent={true}
         onRequestClose={() => setShow(false)}
       />
     </ModalContext.Provider>
