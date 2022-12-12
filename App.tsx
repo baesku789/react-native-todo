@@ -10,6 +10,7 @@
 
 import React, {createContext, useCallback, useEffect, useState} from 'react';
 import {
+  Dimensions,
   SafeAreaView,
   StatusBar,
   Text,
@@ -19,8 +20,8 @@ import {
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import GoogleSignInBtn from './components/google-signIn/GoogleSignInBtn';
-import TodoList from './components/todo/TodoList';
 import TodoContainer from './components/todo/TodoContainer';
+import {WebView} from 'react-native-webview';
 
 export const AuthContext = createContext<FirebaseAuthTypes.User | null>(null);
 
@@ -69,6 +70,16 @@ const App = () => {
         <View className={'p-20 w-screen'}>
           <Text className={'text-20'}>{email}님</Text>
           <TodoContainer />
+        </View>
+        <View className={'mt-100'}>
+          <Text>this is webview</Text>
+          <WebView
+            style={{
+              width: Dimensions.get('window').width,
+              height: Dimensions.get('window').height,
+            }}
+            source={{uri: 'https://www.naver.com/'}}
+          />
         </View>
       </SafeAreaView>
     </AuthContext.Provider>

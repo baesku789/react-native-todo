@@ -1,4 +1,3 @@
-import MakeTodoBtn from '../make-todo/MakeTodoBtn';
 import {FlatList, StyleSheet} from 'react-native';
 import Todo from './Todo';
 import React from 'react';
