@@ -1,24 +1,13 @@
-import React, {Component} from 'react';
-import WebView from 'react-native-webview';
-import {NativeModules, requireNativeComponent} from 'react-native';
-const {CustomWebViewManager} = NativeModules;
+import React from 'react';
+import {WebView} from 'react-native-webview';
+import {View} from 'react-native';
 
-export default class CustomWebView extends Component {
-  render() {
-    return (
-      <WebView
-        {...this.props}
-        nativeConfig={{
-          component: RCTCustomWebView,
-          viewManager: CustomWebViewManager,
-        }}
-      />
-    );
-  }
-}
+const CustomWebView = () => {
+  return (
+    <View className={'w-full border-1 border-black h-300'}>
+      <WebView source={{uri: 'https://www.naver.com/'}} />
+    </View>
+  );
+};
 
-const RCTCustomWebView = requireNativeComponent(
-  'RCTCustomWebView',
-  CustomWebView,
-  WebView.extraNativeComponentConfig,
-);
+export default CustomWebView;

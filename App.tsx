@@ -22,6 +22,7 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import GoogleSignInBtn from './components/google-signIn/GoogleSignInBtn';
 import TodoContainer from './components/todo/TodoContainer';
 import {WebView} from 'react-native-webview';
+import CustomWebView from './components/CustomWebView';
 
 export const AuthContext = createContext<FirebaseAuthTypes.User | null>(null);
 
@@ -73,13 +74,7 @@ const App = () => {
         </View>
         <View className={'mt-100'}>
           <Text>this is webview</Text>
-          <WebView
-            style={{
-              width: Dimensions.get('window').width,
-              height: Dimensions.get('window').height,
-            }}
-            source={{uri: 'https://www.naver.com/'}}
-          />
+          <CustomWebView />
         </View>
       </SafeAreaView>
     </AuthContext.Provider>
