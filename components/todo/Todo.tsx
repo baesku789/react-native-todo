@@ -52,11 +52,15 @@ const Todo = ({text, done, id}: ITodo) => {
             <CheckIcon fill={'#81f547'} />
           )}
         </Pressable>
-        <Text className={'text-18'}>{text}</Text>
+        <View className={'flex-1'}>
+          <Text className={'text-18 text-ellipsis whitespace-nowrap'}>
+            {text}
+          </Text>
+        </View>
+        <Pressable onPress={deleteTodo}>
+          <DeleteIcon fill={'#ed7272'} />
+        </Pressable>
       </View>
-      <Pressable onPress={deleteTodo}>
-        <DeleteIcon fill={'#ed7272'} />
-      </Pressable>
     </View>
   );
 };
