@@ -1,5 +1,5 @@
 import {Pressable, Text, View} from 'react-native';
-import {ITodo} from '../index';
+import {ITodo} from '../../index';
 import React, {useEffect, useState} from 'react';
 import CheckIcon from 'assets/images/task_alt_FILL0_wght400_GRAD0_opsz40.svg';
 import DeleteIcon from 'assets/images/delete_FILL0_wght400_GRAD0_opsz40.svg';

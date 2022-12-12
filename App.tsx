@@ -19,7 +19,8 @@ import {
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import GoogleSignInBtn from './components/google-signIn/GoogleSignInBtn';
-import TodoList from './components/TodoList';
+import TodoList from './components/todo/TodoList';
+import TodoContainer from './components/todo/TodoContainer';
 
 export const AuthContext = createContext<FirebaseAuthTypes.User | null>(null);
 
@@ -67,7 +68,7 @@ const App = () => {
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <View className={'p-20 w-screen'}>
           <Text className={'text-20 mb-25'}>{email}님</Text>
-          <TodoList />
+          <TodoContainer />
         </View>
       </SafeAreaView>
     </AuthContext.Provider>
