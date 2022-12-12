@@ -67,7 +67,7 @@ const App = () => {
       <SafeAreaView>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <View className={'p-20 w-screen'}>
-          <Text className={'text-20 mb-25'}>{email}님</Text>
+          <Text className={'text-20'}>{email}님</Text>
           <TodoContainer />
         </View>
       </SafeAreaView>
