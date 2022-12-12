@@ -36,7 +36,7 @@ const MakeTodoModal = (props: MakeTodoModalProp) => {
     firestore()
       .collection('Todos')
       .add({
-        text,
+        text: text.trim(),
         done: false,
         email,
       })
