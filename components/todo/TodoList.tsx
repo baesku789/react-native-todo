@@ -19,6 +19,7 @@ const TodoList = ({todos}: TodoListProps) => {
       contentContainerStyle={styles.container}
       data={todos}
       renderItem={renderItem}
+      keyExtractor={item => item.id}
     />
   );
 };
