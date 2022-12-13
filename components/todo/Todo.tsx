@@ -80,9 +80,16 @@ const Todo = ({text, done, id}: ITodo) => {
           </Pressable>
         </View>
         {isEdit ? (
-          <Pressable onPress={() => setIsEdit(false)}>
-            <CancelIcon fill={'#212121'} />
-          </Pressable>
+          <View className={'mr-5'}>
+            <Pressable onPress={() => setIsEdit(false)}>
+              <CancelIcon
+                fill={'#212121'}
+                viewBox={'0 0 48 48'}
+                width={30}
+                height={30}
+              />
+            </Pressable>
+          </View>
         ) : (
           <Pressable onPress={deleteTodo}>
             <DeleteIcon fill={'#ed7272'} />
