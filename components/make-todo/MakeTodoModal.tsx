@@ -59,6 +59,7 @@ const MakeTodoModal = (props: MakeTodoModalProp) => {
                 onChangeText={onChangeText}
                 placeholder={'할 일을 입력하세요.'}
                 autoFocus={true}
+                onSubmitEditing={() => submitTodo(text)}
               />
               <Button
                 className={'rounded-full w-60 mt-20'}
