@@ -15,6 +15,7 @@ const TodoContainer = () => {
   const {email} = user as FirebaseAuthTypes.User;
 
   const [todos, setTodos] = useState<FirebaseFirestoreTypes.DocumentData[]>([]);
+  const doneTodos = !todos ? 0 : todos.filter(todo => todo.done).length;
 
   const addTodo = (
     change: FirebaseFirestoreTypes.DocumentChange<FirebaseFirestoreTypes.DocumentData>,
@@ -69,6 +70,7 @@ const TodoContainer = () => {
   return (
     <View className={'w-full flex justify-center mt-20 relative'}>
       <Text>{todos.length}개의 할 일이 있습니다.</Text>
+      <Text className={'text-16 font-bold'}>{doneTodos}개 완료</Text>
       <TodoList todos={todos} />
       <MakeTodoBtn />
     </View>
