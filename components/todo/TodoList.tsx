@@ -14,7 +14,7 @@ const TodoList = ({todos}: TodoListProps) => {
   };
 
   return (
-    <View className={'h-[65vh]'}>
+    <View className={'max-h-[65vh]'}>
       <FlatList
         contentContainerStyle={styles.container}
         data={todos}
