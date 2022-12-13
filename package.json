@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "debug": "react-devtools"
   },
   "dependencies": {
     "@react-native-firebase/app": "^16.4.6",
@@ -19,7 +20,8 @@
     "nativewind": "^2.0.11",
     "react": "18.1.0",
     "react-native": "0.70.6",
-    "react-native-svg": "^13.6.0"
+    "react-native-svg": "^13.6.0",
+    "react-native-webview": "^11.26.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
