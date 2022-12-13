@@ -65,18 +65,13 @@ const Todo = ({text, done, id}: ITodo) => {
         <View className={'flex-1'}>
           <Pressable onLongPress={() => setIsEdit(true)}>
             {isEdit ? (
-              <View className={'flex justify-between flex-row'}>
-                <TextInput
-                  className={'box-border flex-1 text-18'}
-                  value={editText || text}
-                  onChangeText={onChangeText}
-                  focusable={true}
-                  onSubmitEditing={editTodo}
-                />
-                <Pressable onPress={() => setIsEdit(false)}>
-                  <CancelIcon fill={'#212121'} />
-                </Pressable>
-              </View>
+              <TextInput
+                className={'box-border flex-1 text-18'}
+                value={editText || text}
+                onChangeText={onChangeText}
+                focusable={true}
+                onSubmitEditing={editTodo}
+              />
             ) : (
               <Text className={'text-18 text-ellipsis whitespace-nowrap'}>
                 {editText || text}
@@ -84,9 +79,15 @@ const Todo = ({text, done, id}: ITodo) => {
             )}
           </Pressable>
         </View>
-        <Pressable onPress={deleteTodo}>
-          <DeleteIcon fill={'#ed7272'} />
-        </Pressable>
+        {isEdit ? (
+          <Pressable onPress={() => setIsEdit(false)}>
+            <CancelIcon fill={'#212121'} />
+          </Pressable>
+        ) : (
+          <Pressable onPress={deleteTodo}>
+            <DeleteIcon fill={'#ed7272'} />
+          </Pressable>
+        )}
       </View>
     </View>
   );
