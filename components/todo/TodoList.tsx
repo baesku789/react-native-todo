@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import Todo from './Todo';
 import React from 'react';
 import {ITodo} from '../../index';
@@ -14,12 +14,14 @@ const TodoList = ({todos}: TodoListProps) => {
   };
 
   return (
-    <FlatList
-      contentContainerStyle={styles.container}
-      data={todos}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
+    <View className={'h-[65vh]'}>
+      <FlatList
+        contentContainerStyle={styles.container}
+        data={todos}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+    </View>
   );
 };
 
