@@ -73,7 +73,6 @@ const App = () => {
           <TodoContainer />
         </View>
         <View className={'mt-100'}>
-          <Text>this is webview</Text>
           <CustomWebView />
         </View>
       </SafeAreaView>
