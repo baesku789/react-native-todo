@@ -10,7 +10,6 @@
 
 import React, {createContext, useCallback, useEffect, useState} from 'react';
 import {
-  Dimensions,
   SafeAreaView,
   StatusBar,
   Text,
@@ -21,8 +20,6 @@ import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import GoogleSignInBtn from './components/google-signIn/GoogleSignInBtn';
 import TodoContainer from './components/todo/TodoContainer';
-import {WebView} from 'react-native-webview';
-import CustomWebView from './components/CustomWebView';
 
 export const AuthContext = createContext<FirebaseAuthTypes.User | null>(null);
 
@@ -62,14 +59,22 @@ const App = () => {
     );
   }
 
-  const {email} = user as FirebaseAuthTypes.User;
+  const {displayName} = user as FirebaseAuthTypes.User;
+
+  const date = new Date();
+  const formattedDate = Intl.DateTimeFormat('ko', {dateStyle: 'full'}).format(
+    date,
+  );
 
   return (
     <AuthContext.Provider value={user}>
       <SafeAreaView>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <View className={'p-20 w-screen'}>
-          <Text className={'text-20'}>{email}님</Text>
+          <View className={'flex flex-row justify-between items-end'}>
+            <Text className={'text-20'}>{displayName}님</Text>
+            <Text className={'text-12'}>{formattedDate}</Text>
+          </View>
           <TodoContainer />
         </View>
         {/*<View className={'mt-100'}>*/}
