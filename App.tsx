@@ -72,9 +72,9 @@ const App = () => {
           <Text className={'text-20'}>{email}님</Text>
           <TodoContainer />
         </View>
-        <View className={'mt-100'}>
-          <CustomWebView />
-        </View>
+        {/*<View className={'mt-100'}>*/}
+        {/*  <CustomWebView />*/}
+        {/*</View>*/}
       </SafeAreaView>
     </AuthContext.Provider>
   );
